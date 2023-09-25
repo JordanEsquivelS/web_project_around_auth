@@ -6,3 +6,9 @@
     margin: 0 0 0 27px;
   }
 }
+
+@media (max-width: 345px) {
+  .header__logo_image{
+    max-width: 126px;
+  }
+}
