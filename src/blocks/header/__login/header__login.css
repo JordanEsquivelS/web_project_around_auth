@@ -1,0 +1,21 @@
+.header__login {
+  color: white;
+  cursor: pointer;
+  margin-top: auto;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 22px;
+  outline: none;
+  opacity: 1;
+  transition: opacity 0.7s;
+  font-family: inherit;
+  background: none;
+  border: none;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.header__login:hover {
+  opacity: 0.5;
+}
