@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import EditProfilePopup from "../components/EditProfilePopup";
+import EditProfilePopup from "./EditProfilePopup";
 import EditAvatarPopup from "./EditAvatarPopup";
 import CurrentUserContext from "../contexts/CurrentUserContext";
 import "../index.css";
