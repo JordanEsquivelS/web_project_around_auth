@@ -4,6 +4,8 @@ import EditAvatarPopup from "./EditAvatarPopup";
 import CurrentUserContext from "../contexts/CurrentUserContext";
 import "../index.css";
 import Header from "./Header";
+import Register from "./Registrer";
+import Login from "./Login";
 import Main from "./Main";
 import AddPlacePopup from "./AddPlacePopup";
 import Footer from "./Footer";
@@ -143,6 +145,8 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
         <Header />
+        <Register />
+        <Login />
         <Main
           cards={cards}
           onCardLike={handleCardLike}

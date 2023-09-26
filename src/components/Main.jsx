@@ -1,7 +1,5 @@
 import React, { useContext } from "react";
 import CurrentUserContext from "../contexts/CurrentUserContext";
-import Register from "./Registrer";
-/*import Login from "./Login";*/
 import PopupWithForm from "./PopupWithForm";
 import Card from "./Card";
 import ImagePopup from "./ImagePopup";
@@ -11,8 +9,6 @@ function Main(props) {
 
   return (
     <main className="content">
-      <Register />
-      {/* <Login/> */}
       <>
         <div className="profile">
           <div className="profile__conteinerImg">
