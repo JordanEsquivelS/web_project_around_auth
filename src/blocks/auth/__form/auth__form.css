@@ -1,4 +1,4 @@
-.registration__form {
+.auth__form {
   max-width: 388px;
   margin: 50px auto 0;
   display: flex;
@@ -8,7 +8,7 @@
 }
 
 @media (max-width: 431px) {
-  .registration__form {
+  .auth__form {
     width: 290px;
   }
 }

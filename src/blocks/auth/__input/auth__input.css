@@ -1,4 +1,4 @@
-.registration__input {
+.auth__input {
   font-size: 14px;
   width: 358px;
   font-family: Inter;
@@ -13,7 +13,7 @@
 }
 
 @media (max-width: 431px) {
-  .registration__input{
+  .auth__input{
     width: 260px;
   }
 }

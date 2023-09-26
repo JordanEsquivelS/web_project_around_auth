@@ -22,48 +22,48 @@ function Register() {
   };
 
   return (
-    <div className="registration">
-      <h2 className="registration__title">Regístrate</h2>
+    <div className="auth">
+      <h2 className="auth__title">Regístrate</h2>
 
-      <form className="registration__form" onSubmit={handleSubmit}>
+      <form className="auth__form" onSubmit={handleSubmit}>
         <input
           type="email"
           name="email"
           placeholder="Correo electrónico"
           required
-          className="registration__input"
+          className="auth__input"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
-        <div className="registration__passwordContainer">
+        <div className="auth__passwordContainer">
           <input
             type={showPassword ? "text" : "password"}
             name="password"
             placeholder="Contraseña"
             required
-            className="registration__input"
+            className="auth__input"
             value={password}
             maxLength={10}
             onChange={(e) => setPassword(e.target.value)}
           />
           <span
             onClick={togglePasswordVisibility}
-            className="registration__togglePassword"
+            className="auth__togglePassword"
           >
             <img
-              className="registration__toggleImg"
+              className="auth__toggleImg"
               src={showPassword ? ojoEsconderBlanco : ojoBlanco}
               alt={showPassword ? "Ocultar contraseña" : "Mostrar contraseña"}
             />
           </span>
         </div>
 
-        <button className="registration__button">Regístrate</button>
+        <button className="auth__button">Regístrate</button>
       </form>
 
-      <span className="registration__link">
+      <span className="auth__link">
         ¿Ya eres miembro?{" "}
-        <a href=" " className="registration__linkAnchor">
+        <a href=" " className="auth__linkAnchor">
           Inicia sesión aquí
         </a>
       </span>
@@ -72,3 +72,4 @@ function Register() {
 }
 
 export default Register;
+
