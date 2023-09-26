@@ -1,6 +1,16 @@
 @import url(./vendor/normalize.css);
 @import url(./fonts/InterWeb/inter.css);
 @import url(./blocks/page/page.css);
+@import url(./blocks/registration/registration.css);
+@import url(./blocks/registration/__title/registration__title.css);
+@import url(./blocks/registration/__form/registration__form.css);
+@import url(./blocks/registration/__passwordContainer/registration__passwordContainer.css);
+@import url(./blocks/registration/__input/registration__input.css);
+@import url(./blocks/registration/__togglePassword/registration__togglePassword.css);
+@import url(./blocks/registration/__toggleImg/registration__toggleImg.css);
+@import url(./blocks/registration/__button/registration__button.css);
+@import url(./blocks/registration/__link/registration__link.css);
+@import url(./blocks/registration/__linkAnchor/registration__linkAnchor.css);
 @import url(./blocks/header/header.css);
 @import url(./blocks/header/__login/header__login.css);
 @import url(./blocks/header/__logo/header__logo.css);
