@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/web_project_around_auth/static/css/main.50a7f863.css",
-    "main.js": "/web_project_around_auth/static/js/main.196c4130.js",
+    "main.css": "/web_project_around_auth/static/css/main.83d8511f.css",
+    "main.js": "/web_project_around_auth/static/js/main.2a7eabee.js",
     "static/js/787.1c78f32b.chunk.js": "/web_project_around_auth/static/js/787.1c78f32b.chunk.js",
     "static/media/Inter-SemiBold.woff": "/web_project_around_auth/static/media/Inter-SemiBold.cca62d21c8c555c392e5.woff",
     "static/media/Inter-Black.woff": "/web_project_around_auth/static/media/Inter-Black.c6938660eec019fefd68.woff",
@@ -9,8 +9,7 @@
     "static/media/Inter-SemiBold.woff2": "/web_project_around_auth/static/media/Inter-SemiBold.b5f0f109bc88052d4000.woff2",
     "static/media/Inter-Black.woff2": "/web_project_around_auth/static/media/Inter-Black.15ca31c0a2a68f76d2d1.woff2",
     "static/media/Inter-Regular.woff2": "/web_project_around_auth/static/media/Inter-Regular.c8ba52b05a9ef10f4758.woff2",
-    "static/media/ojo_blanco.png": "/web_project_around_auth/static/media/ojo_blanco.fcbe53614e62b32befa1.png",
-    "static/media/ojo_esconderBlanco.png": "/web_project_around_auth/static/media/ojo_esconderBlanco.b26997a4db44ea782963.png",
+    "static/media/ojo_blanco.png": "/web_project_around_auth/static/media/ojo_blanco.ac0bd353d04f43aea809.png",
     "static/media/logo.svg": "/web_project_around_auth/static/media/logo.c75819857ff1599f0c50e9fc06373cd9.svg",
     "static/media/corazon_blanco.svg": "/web_project_around_auth/static/media/corazon_blanco.99043841e8bec6b9df21.svg",
     "index.html": "/web_project_around_auth/index.html",
@@ -20,12 +19,12 @@
     "static/media/Edit_Button.svg": "/web_project_around_auth/static/media/Edit_Button.af236f6cf67005f1d7aa37d370e5df9d.svg",
     "static/media/edit_img_profile.svg": "/web_project_around_auth/static/media/edit_img_profile.ae1a976ddb506239e9f06655014e44a3.svg",
     "static/media/adicion.svg": "/web_project_around_auth/static/media/adicion.d5d6f8af0577b9c95ee43048c9756c7b.svg",
-    "main.50a7f863.css.map": "/web_project_around_auth/static/css/main.50a7f863.css.map",
-    "main.196c4130.js.map": "/web_project_around_auth/static/js/main.196c4130.js.map",
+    "main.83d8511f.css.map": "/web_project_around_auth/static/css/main.83d8511f.css.map",
+    "main.2a7eabee.js.map": "/web_project_around_auth/static/js/main.2a7eabee.js.map",
     "787.1c78f32b.chunk.js.map": "/web_project_around_auth/static/js/787.1c78f32b.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.50a7f863.css",
-    "static/js/main.196c4130.js"
+    "static/css/main.83d8511f.css",
+    "static/js/main.2a7eabee.js"
   ]
 }
