@@ -6,6 +6,7 @@ import "../index.css";
 import Header from "./Header";
 import Register from "./Registrer";
 import Login from "./Login";
+import InfoTooltip from "./InfoTooltip";
 import Main from "./Main";
 import AddPlacePopup from "./AddPlacePopup";
 import Footer from "./Footer";
@@ -146,6 +147,7 @@ function App() {
       <div className="page">
         <Header />
         <Register />
+        <InfoTooltip />
         <Login />
         <Main
           cards={cards}

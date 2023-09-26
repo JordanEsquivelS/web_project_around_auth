@@ -11,6 +11,12 @@
 @import url(./blocks/auth/__button/auth__button.css);
 @import url(./blocks/auth/__link/auth__link.css);
 @import url(./blocks/auth/__linkAnchor/auth__linkAnchor.css);
+@import url(./blocks/info-tooltip/info-tooltip.css);
+@import url(./blocks/info-tooltip/__wrapper/info-tooltip__wrapper.css);
+@import url(./blocks/info-tooltip/__content/info-tooltip__content.css);
+@import url(./blocks/info-tooltip/__close/info-tooltip__close.css);
+@import url(./blocks/info-tooltip/__image/info-tooltip__image.css);
+@import url(./blocks/info-tooltip/__message/info-tooltip__message.css);
 @import url(./blocks/header/header.css);
 @import url(./blocks/header/__login/header__login.css);
 @import url(./blocks/header/__logo/header__logo.css);
