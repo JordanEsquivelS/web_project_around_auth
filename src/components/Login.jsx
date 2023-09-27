@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import ojoBlanco from "../images/ojo_blanco.png";
 import ojoEsconderBlanco from "../images/ojo_esconderBlanco.png";
 
@@ -62,10 +63,10 @@ function Login() {
       </form>
 
       <span className="auth__link">
-        ¿Aún no eres miembro?{" "}
-        <a href=" " className="auth__linkAnchor">
+        ¿Aún no eres miembro?
+        <Link to="/signup" className="auth__linkAnchor">
           Regístrate aquí
-        </a>
+        </Link>
       </span>
     </div>
   );

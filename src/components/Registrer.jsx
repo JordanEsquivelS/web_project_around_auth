@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import React, { useState } from "react";
 import ojoBlanco from "../images/ojo_blanco.png";
 import ojoEsconderBlanco from "../images/ojo_esconderBlanco.png";
@@ -62,14 +63,13 @@ function Register() {
       </form>
 
       <span className="auth__link">
-        ¿Ya eres miembro?{" "}
-        <a href=" " className="auth__linkAnchor">
+        ¿Ya eres miembro?
+        <Link to="/signin" className="auth__linkAnchor">
           Inicia sesión aquí
-        </a>
+        </Link>
       </span>
     </div>
   );
 }
 
 export default Register;
-

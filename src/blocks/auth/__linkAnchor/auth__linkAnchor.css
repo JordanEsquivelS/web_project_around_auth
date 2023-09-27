@@ -6,6 +6,7 @@
   text-decoration: none;
   opacity: 1;
   transition: opacity 0.7s;
+  margin-left: 5px;
 }
 .auth__linkAnchor:hover{
   opacity: 0.5;

@@ -1,14 +1,18 @@
-import React, { useState } from "react";
+import React from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 
 function Header() {
-  // Estado para determinar si el popup de inicio de sesión está abierto o no
-  const [isLoginPopupOpen, setIsLoginPopupOpen] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
 
-  // Función para manejar el click en el span
   const handleLoginClick = () => {
-    // Abrir o cerrar el popup. Aquí también puedes agregar la lógica para mostrar el popup.
-    setIsLoginPopupOpen(!isLoginPopupOpen);
+    if (location.pathname.includes("/signin")) {
+      navigate("/signup");
+    } else {
+      navigate("/signin");
+    }
   };
+
   return (
     <header className="header">
       <div className="header header__logo">
@@ -17,11 +21,13 @@ function Header() {
           src={require("../images/logo.svg").default}
           alt="Logo Around"
         />
+        <span className="header__emailLogin"> </span>
         <button className="header__login" onClick={handleLoginClick}>
-        {isLoginPopupOpen ? "Regístrate" : "Iniciar sesión"}
-      </button>
+          {location.pathname.includes("/signin")
+            ? "Regístrate"
+            : "Iniciar sesión"}
+        </button>
       </div>
-
       <div className="header__line"></div>
     </header>
   );
