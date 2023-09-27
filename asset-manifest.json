@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/web_project_around_auth/static/css/main.83d8511f.css",
-    "main.js": "/web_project_around_auth/static/js/main.2a7eabee.js",
+    "main.css": "/web_project_around_auth/static/css/main.b0684a54.css",
+    "main.js": "/web_project_around_auth/static/js/main.0f82d009.js",
     "static/js/787.1c78f32b.chunk.js": "/web_project_around_auth/static/js/787.1c78f32b.chunk.js",
     "static/media/Inter-SemiBold.woff": "/web_project_around_auth/static/media/Inter-SemiBold.cca62d21c8c555c392e5.woff",
     "static/media/Inter-Black.woff": "/web_project_around_auth/static/media/Inter-Black.c6938660eec019fefd68.woff",
@@ -14,17 +14,19 @@
     "static/media/corazon_blanco.svg": "/web_project_around_auth/static/media/corazon_blanco.99043841e8bec6b9df21.svg",
     "index.html": "/web_project_around_auth/index.html",
     "static/media/delete.svg": "/web_project_around_auth/static/media/delete.ba43124316072f7a8629205eb192dd29.svg",
+    "static/media/error-info.svg": "/web_project_around_auth/static/media/error-info.df8eddf661ff88f2d0efd3d570d14309.svg",
+    "static/media/check-info.svg": "/web_project_around_auth/static/media/check-info.1b6082f862eac35e2514460237d96ecc.svg",
     "static/media/corazon_negro.svg": "/web_project_around_auth/static/media/corazon_negro.f8482d28867cec189b08.svg",
     "static/media/CloseIcon_blanco.svg": "/web_project_around_auth/static/media/CloseIcon_blanco.0ca722bc0e922fcea36ebcf0f148a544.svg",
     "static/media/Edit_Button.svg": "/web_project_around_auth/static/media/Edit_Button.af236f6cf67005f1d7aa37d370e5df9d.svg",
     "static/media/edit_img_profile.svg": "/web_project_around_auth/static/media/edit_img_profile.ae1a976ddb506239e9f06655014e44a3.svg",
     "static/media/adicion.svg": "/web_project_around_auth/static/media/adicion.d5d6f8af0577b9c95ee43048c9756c7b.svg",
-    "main.83d8511f.css.map": "/web_project_around_auth/static/css/main.83d8511f.css.map",
-    "main.2a7eabee.js.map": "/web_project_around_auth/static/js/main.2a7eabee.js.map",
+    "main.b0684a54.css.map": "/web_project_around_auth/static/css/main.b0684a54.css.map",
+    "main.0f82d009.js.map": "/web_project_around_auth/static/js/main.0f82d009.js.map",
     "787.1c78f32b.chunk.js.map": "/web_project_around_auth/static/js/787.1c78f32b.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.83d8511f.css",
-    "static/js/main.2a7eabee.js"
+    "static/css/main.b0684a54.css",
+    "static/js/main.0f82d009.js"
   ]
 }
