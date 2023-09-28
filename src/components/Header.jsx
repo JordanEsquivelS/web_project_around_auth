@@ -1,11 +1,22 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+import CurrentUserContext from "../contexts/CurrentUserContext";
 
-function Header() {
+function Header({ onLogout }) {
   const location = useLocation();
   const navigate = useNavigate();
 
+  const { currentUser, setUser } = useContext(CurrentUserContext);
+
   const handleLoginClick = () => {
+    if (currentUser) {
+      setUser(null);
+      localStorage.removeItem("jwt");
+      onLogout();
+      navigate("/signin");
+      return;
+    }
+
     if (location.pathname.includes("/signin")) {
       navigate("/signup");
     } else {
@@ -21,9 +32,14 @@ function Header() {
           src={require("../images/logo.svg").default}
           alt="Logo Around"
         />
-        <span className="header__emailLogin"> </span>
+        <span className="header__emailLogin">
+          {currentUser ? currentUser.email : ""}
+        </span>
+
         <button className="header__login" onClick={handleLoginClick}>
-          {location.pathname.includes("/signin")
+          {currentUser
+            ? "Cerrar sesión"
+            : location.pathname.includes("/signin")
             ? "Regístrate"
             : "Iniciar sesión"}
         </button>

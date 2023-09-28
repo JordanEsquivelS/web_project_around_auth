@@ -1,9 +1,10 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 import ojoBlanco from "../images/ojo_blanco.png";
 import ojoEsconderBlanco from "../images/ojo_esconderBlanco.png";
 
-function Register() {
+function Register({ onRegister }) {
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -14,14 +15,14 @@ function Register() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     if (email && password) {
-      console.log("Formulario enviado!");
+      onRegister(password, email).then(() => {
+        navigate("/main");
+      });
     } else {
       alert("Por favor, completa todos los campos.");
     }
   };
-
   return (
     <div className="auth">
       <h2 className="auth__title">Regístrate</h2>

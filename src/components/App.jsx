@@ -18,7 +18,7 @@ import Main from "./Main";
 import AddPlacePopup from "./AddPlacePopup";
 import Footer from "./Footer";
 import api from "../utils/api";
-import { authorize, checkToken } from "../utils/auth";
+import { authorize, checkToken, register } from "../utils/auth";
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
@@ -31,17 +31,56 @@ function App() {
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
   const [isDeleteForm, setDeleteForm] = useState(false);
 
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(!!localStorage.getItem("jwt"));
+
+  const [showTooltip, setShowTooltip] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+
+  const handleRegister = (password, email) => {
+    register(password, email)
+      .then((data) => {
+        if (data) {
+          setIsSuccess(true);
+          setLoggedIn(true);
+        } else {
+          setIsSuccess(false);
+        }
+        setShowTooltip(true);
+      })
+      .catch(() => {
+        setIsSuccess(false);
+        setShowTooltip(true);
+      });
+  };
+
+  const mergeUserData = (authData, apiData) => {
+    if (authData && apiData) {
+      return { ...authData, ...apiData };
+    }
+    if (authData) return authData;
+    if (apiData) return apiData;
+    return null;
+  };
 
   const handleLogin = (password, email) => {
     authorize(password, email)
       .then((data) => {
         if (data.token) {
           localStorage.setItem("jwt", data.token);
-          setLoggedIn(true); 
+          checkToken(data.token)
+            .then(async (authUserData) => {
+              const apiUserData = await api.getUserInfo("users/me");
+              const mergedData = mergeUserData(authUserData.data, apiUserData);
+              setCurrentUser(mergedData);
+              setLoggedIn(true);
+            })
+            .catch((err) => {
+              console.log(err);
+            });
         }
       })
       .catch((err) => {
+        localStorage.removeItem("jwt");
         console.log(err);
       });
   };
@@ -50,29 +89,33 @@ function App() {
     const token = localStorage.getItem("jwt");
     if (token) {
       checkToken(token)
-        .then((data) => {
-          if (data.email) {
+        .then(async (authUserData) => {
+          if (authUserData.data && authUserData.data.email) {
+            const apiUserData = await api.getUserInfo("users/me");
+            const mergedData = mergeUserData(authUserData.data, apiUserData);
+            setCurrentUser(mergedData);
             setLoggedIn(true);
+          } else {
+            localStorage.removeItem("jwt");
+            setCurrentUser(null);
+            setLoggedIn(false);
           }
         })
         .catch((err) => {
+          localStorage.removeItem("jwt");
+          setCurrentUser(null);
+          setLoggedIn(false);
           console.log(err);
         });
+    } else {
+      setCurrentUser(null);
+      setLoggedIn(false);
     }
   }, []);
 
-  useEffect(() => {
-    const fetchUserInfo = async () => {
-      try {
-        const userData = await api.getUserInfo("users/me");
-        setCurrentUser(userData);
-      } catch (error) {
-        console.log("Error al obtener la información del usuario:", error);
-      }
-    };
-
-    fetchUserInfo();
-  }, []);
+  function handleLogout() {
+    setLoggedIn(false);
+  }
 
   const handleEditProfileClick = () => {
     setIsEditProfilePopupOpen(true);
@@ -124,8 +167,10 @@ function App() {
       }
     }
 
-    fetchInitialCards();
-  }, []);
+    if (loggedIn) {
+      fetchInitialCards();
+    }
+  }, [loggedIn]);
 
   const handleCardDelete = (id) => {
     handleDeleteForm();
@@ -181,15 +226,39 @@ function App() {
   };
 
   return (
-    <CurrentUserContext.Provider value={currentUser}>
+    <CurrentUserContext.Provider
+      value={{ currentUser, setUser: setCurrentUser }}
+    >
       <Router basename="/web_project_around_auth">
         <div className="page">
-          <Header />
+          <Header onLogout={handleLogout} />
 
           <Routes>
-            <Route path="/" element={<Navigate to="/signup" replace />} />
-            <Route path="/signin" element={<Login />} />
-            <Route path="/signup" element={<Register />} />
+            <Route
+              path="/"
+              element={
+                loggedIn ? (
+                  <Navigate to="/main" replace />
+                ) : (
+                  <Navigate to="/signup" replace />
+                )
+              }
+            />
+            <Route
+              path="/signin"
+              element={
+                loggedIn ? (
+                  <Navigate to="/main" replace />
+                ) : (
+                  <Login onLogin={handleLogin} />
+                )
+              }
+            />
+
+            <Route
+              path="/signup"
+              element={<Register onRegister={handleRegister} />}
+            />
             <Route
               path="/main"
               element={
@@ -216,7 +285,7 @@ function App() {
             />
           </Routes>
 
-          <InfoTooltip />
+          <InfoTooltip isOpen={showTooltip} isSuccess={isSuccess} />
           <EditAvatarPopup
             isOpen={isEditAvatarPopupOpen}
             onClose={closeAllPopups}

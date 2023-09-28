@@ -1,10 +1,11 @@
 import React from "react";
 
-function InfoTooltip({ isSuccess }) {
+function InfoTooltip({ isSuccess, isOpen, onClose }) {
   return (
-    <div className="info-tooltip">
+    <div className={`info-tooltip ${isOpen ? "info-tooltip_opened" : ""}`}>
       <div className="info-tooltip__wrapper">
         <img
+          onClick={onClose}
           className="info-tooltip__close"
           src={require("../images/CloseIcon_blanco.svg").default}
           alt="botón de cerrar"

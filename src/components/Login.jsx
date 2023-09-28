@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import ojoBlanco from "../images/ojo_blanco.png";
 import ojoEsconderBlanco from "../images/ojo_esconderBlanco.png";
 
-function Login() {
+function Login({ onLogin }) {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -16,7 +16,7 @@ function Login() {
     e.preventDefault();
 
     if (email && password) {
-      console.log("Formulario enviado!");
+      onLogin(password, email);
     } else {
       alert("Por favor, completa todos los campos.");
     }

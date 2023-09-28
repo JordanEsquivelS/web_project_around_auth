@@ -5,7 +5,7 @@ import Card from "./Card";
 import ImagePopup from "./ImagePopup";
 
 function Main(props) {
-  const currentUser = useContext(CurrentUserContext);
+  const { currentUser } = useContext(CurrentUserContext);
 
   return (
     <main className="content">
@@ -55,15 +55,16 @@ function Main(props) {
 
       <>
         <div className="grid-container" id="grid-container">
-          {props.cards.map((card) => (
-            <Card
-              key={card._id}
-              card={card}
-              onCardLike={props.onCardLike}
-              onDeleteClick={props.onDeleteClick}
-              onCardClick={props.onCardClick}
-            />
-          ))}
+          {props.cards &&
+            props.cards.map((card) => (
+              <Card
+                key={card._id}
+                card={card}
+                onCardLike={props.onCardLike}
+                onDeleteClick={props.onDeleteClick}
+                onCardClick={props.onCardClick}
+              />
+            ))}
         </div>
       </>
 
