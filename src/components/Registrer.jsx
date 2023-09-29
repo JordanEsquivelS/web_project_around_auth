@@ -3,7 +3,13 @@ import React, { useState } from "react";
 import ojoBlanco from "../images/ojo_blanco.png";
 import ojoEsconderBlanco from "../images/ojo_esconderBlanco.png";
 
-function Register({ onRegister }) {
+function Register({
+  onRegister,
+  loggedIn,
+  setShowTooltip,
+  setIsSuccess,
+  setTooltipMessage,
+}) {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
@@ -15,14 +21,35 @@ function Register({ onRegister }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (password.length < 5 || password.length > 15) {
+      setTooltipMessage("La contraseña debe tener entre 5 y 15 caracteres.");
+      setIsSuccess(false);
+      setShowTooltip(true);
+      return;
+    }
+
     if (email && password) {
-      onRegister(password, email).then(() => {
-        navigate("/main");
-      });
+      onRegister(password, email)
+        .then(() => {
+          if (loggedIn) {
+            navigate("/main");
+          } else {
+            navigate("/signin");
+          }
+        })
+        .catch((error) => {
+          setTooltipMessage("Hubo un error al registrar. Inténtalo de nuevo.");
+          setIsSuccess(false);
+          setShowTooltip(true);
+        });
     } else {
-      alert("Por favor, completa todos los campos.");
+      setTooltipMessage("Por favor, completa todos los campos.");
+      setIsSuccess(false);
+      setShowTooltip(true);
     }
   };
+
   return (
     <div className="auth">
       <h2 className="auth__title">Regístrate</h2>
@@ -45,7 +72,6 @@ function Register({ onRegister }) {
             required
             className="auth__input"
             value={password}
-            maxLength={10}
             onChange={(e) => setPassword(e.target.value)}
           />
           <span

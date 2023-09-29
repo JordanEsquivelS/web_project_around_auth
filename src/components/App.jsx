@@ -35,19 +35,32 @@ function App() {
 
   const [showTooltip, setShowTooltip] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [tooltipMessage, setTooltipMessage] = useState("");
+
+  const closeTooltip = () => {
+    setShowTooltip(false);
+  };
 
   const handleRegister = (password, email) => {
-    register(password, email)
+    return register(password, email)
       .then((data) => {
         if (data) {
           setIsSuccess(true);
-          setLoggedIn(true);
+          setShowTooltip(true);
         } else {
           setIsSuccess(false);
+          setShowTooltip(true);
+          return Promise.reject(new Error("Registro no exitoso"));
         }
-        setShowTooltip(true);
       })
-      .catch(() => {
+      .catch((error) => {
+        if (error.message === "User with this email address already exists") {
+          setTooltipMessage("Este correo electrónico ya está registrado.");
+        } else {
+          setTooltipMessage(
+            "Uy, algo salió mal. Por favor, inténtalo de nuevo."
+          );
+        }
         setIsSuccess(false);
         setShowTooltip(true);
       });
@@ -232,7 +245,6 @@ function App() {
       <Router basename="/web_project_around_auth">
         <div className="page">
           <Header onLogout={handleLogout} />
-
           <Routes>
             <Route
               path="/"
@@ -257,8 +269,17 @@ function App() {
 
             <Route
               path="/signup"
-              element={<Register onRegister={handleRegister} />}
+              element={
+                <Register
+                  onRegister={handleRegister}
+                  loggedIn={loggedIn}
+                  setShowTooltip={setShowTooltip}
+                  setIsSuccess={setIsSuccess}
+                  setTooltipMessage={setTooltipMessage}
+                />
+              }
             />
+
             <Route
               path="/main"
               element={
@@ -284,20 +305,22 @@ function App() {
               }
             />
           </Routes>
-
-          <InfoTooltip isOpen={showTooltip} isSuccess={isSuccess} />
+          <InfoTooltip
+            isSuccess={isSuccess}
+            isOpen={showTooltip}
+            onClose={closeTooltip}
+            message={tooltipMessage}
+          />
           <EditAvatarPopup
             isOpen={isEditAvatarPopupOpen}
             onClose={closeAllPopups}
             onUpdateAvatar={handleUpdateAvatar}
           />
-
           <EditProfilePopup
             isOpen={isEditProfilePopupOpen}
             onClose={closeAllPopups}
             onUpdateUser={handleUpdateUser}
           />
-
           <AddPlacePopup
             isOpen={isAddPlacePopupOpen}
             onClose={closeAllPopups}

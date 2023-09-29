@@ -1,6 +1,6 @@
 import React from "react";
 
-function InfoTooltip({ isSuccess, isOpen, onClose }) {
+function InfoTooltip({ isSuccess, isOpen, onClose, message }) {
   return (
     <div className={`info-tooltip ${isOpen ? "info-tooltip_opened" : ""}`}>
       <div className="info-tooltip__wrapper">
@@ -21,9 +21,7 @@ function InfoTooltip({ isSuccess, isOpen, onClose }) {
             alt={isSuccess ? "Correcto" : "Error"}
           />
           <p className="info-tooltip__message">
-            {isSuccess
-              ? "¡Correcto! Ya estás registrado."
-              : "Uy, algo salió mal. Por favor, inténtalo de nuevo."}
+            {isSuccess ? "¡Correcto! Ya estás registrado." : message}
           </p>
         </div>
       </div>
