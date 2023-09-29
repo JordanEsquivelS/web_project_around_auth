@@ -27,24 +27,35 @@ function Header({ onLogout }) {
   return (
     <header className="header">
       <div className="header header__logo">
-        <img
-          className="header__logo header__logo_image"
-          src={require("../images/logo.svg").default}
-          alt="Logo Around"
-        />
-        <span className="header__emailLogin">
-          {currentUser ? currentUser.email : ""}
-        </span>
+        <div className="header__wrapper">
+          <span className="header__emailLogin">
+            {currentUser ? currentUser.email : ""}
+          </span>
 
-        <button className="header__login" onClick={handleLoginClick}>
-          {currentUser
-            ? "Cerrar sesión"
-            : location.pathname.includes("/signin")
-            ? "Regístrate"
-            : "Iniciar sesión"}
-        </button>
+          <button className="header__login" onClick={handleLoginClick}>
+            {currentUser
+              ? "Cerrar sesión"
+              : location.pathname.includes("/signin")
+              ? "Regístrate"
+              : "Iniciar sesión"}
+          </button>
+          <div className="header__lineHamburguesa" aria-hidden="true"></div>
+        </div>
+        <div className="header__imageContainer">
+          <img
+            src={require("../images/menu_hamburguesa.png")}
+            alt="Menu Hamburguesa"
+            className="header__menuHamburguesa"
+          />
+          <img
+            className="header__logo header__logo_image"
+            src={require("../images/logo.svg").default}
+            alt="Logo Around"
+          />
+        </div>
       </div>
-      <div className="header__line"></div>
+
+      <div className="header__line" aria-hidden="true"></div>
     </header>
   );
 }

@@ -1,8 +1,14 @@
 .header__emailLogin {
   display: block;
-  margin: auto 23px 0 auto;
+  margin-top: auto;
   color: white;
   font-size: 14px;
   height: 18px;
   max-width: 200px;
+}
+
+@media (max-width: 580px) {
+  .header__emailLogin {
+    margin: auto;
+  }
 }
