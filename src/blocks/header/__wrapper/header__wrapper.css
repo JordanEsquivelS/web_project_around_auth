@@ -1,0 +1,14 @@
+.header__wrapper {
+  margin-top: auto;
+  width: 320px;
+  display: flex;
+  justify-content: space-between;
+}
+
+@media (max-width: 580px) {
+  .header__wrapper {
+    margin-top: 40px;
+    width: 100%;
+    flex-direction: column;
+  }
+}
