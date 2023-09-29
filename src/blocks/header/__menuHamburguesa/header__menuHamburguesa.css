@@ -8,6 +8,11 @@
 @media (max-width: 580px) {
   .header__menuHamburguesa {
     display: block;
+    opacity: 1;
+    transition: opacity 0.7s;
+  }
+  .header__menuHamburguesa:hover {
+    opacity: 0.5;
   }
 }
 
