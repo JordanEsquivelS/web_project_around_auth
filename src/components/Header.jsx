@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import CurrentUserContext from "../contexts/CurrentUserContext";
 
@@ -7,6 +7,11 @@ function Header({ onLogout }) {
   const navigate = useNavigate();
 
   const { currentUser, setUser } = useContext(CurrentUserContext);
+  const [menuActive, setMenuActive] = useState(false);
+
+  const toggleMenu = () => {
+    setMenuActive((prevState) => !prevState);
+  };
 
   const handleLoginClick = () => {
     if (currentUser) {
@@ -27,8 +32,16 @@ function Header({ onLogout }) {
   return (
     <header className="header">
       <div className="header header__logo">
-        <div className="header__wrapper">
-          <span className="header__emailLogin">
+        <div
+          className={`header__wrapper ${
+            menuActive ? "header__wrapper--active" : ""
+          }`}
+        >
+          <span
+            className={`header__emailLogin ${
+              currentUser ? "header__emailLogin--active" : ""
+            }`}
+          >
             {currentUser ? currentUser.email : ""}
           </span>
 
@@ -43,14 +56,15 @@ function Header({ onLogout }) {
         </div>
         <div className="header__imageContainer">
           <img
-            src={require("../images/menu_hamburguesa.png")}
-            alt="Menu Hamburguesa"
-            className="header__menuHamburguesa"
-          />
-          <img
             className="header__logo header__logo_image"
             src={require("../images/logo.svg").default}
             alt="Logo Around"
+          />
+          <img
+            src={require("../images/menu_hamburguesa.png")}
+            alt="Menu Hamburguesa"
+            className="header__menuHamburguesa"
+            onClick={toggleMenu}
           />
         </div>
       </div>
