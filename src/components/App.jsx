@@ -41,29 +41,26 @@ function App() {
     setShowTooltip(false);
   };
 
-  const handleRegister = (password, email) => {
-    return register(password, email)
-      .then((data) => {
-        if (data) {
-          setIsSuccess(true);
-          setShowTooltip(true);
-        } else {
-          setIsSuccess(false);
-          setShowTooltip(true);
-          return Promise.reject(new Error("Registro no exitoso"));
-        }
-      })
-      .catch((error) => {
-        if (error.message === "User with this email address already exists") {
-          setTooltipMessage("Este correo electrónico ya está registrado.");
-        } else {
-          setTooltipMessage(
-            "Uy, algo salió mal. Por favor, inténtalo de nuevo."
-          );
-        }
+  const handleRegister = async (password, email) => {
+    try {
+      const data = await register(password, email);
+      if (data) {
+        setIsSuccess(true);
+        setShowTooltip(true);
+      } else {
         setIsSuccess(false);
         setShowTooltip(true);
-      });
+        throw new Error("Registro no exitoso");
+      }
+    } catch (error) {
+      setIsSuccess(false);
+      setShowTooltip(true);
+      if (error.message === "User with this email address already exists") {
+        setTooltipMessage("Este correo electrónico ya está registrado.");
+      } else {
+        setTooltipMessage("Uy, algo salió mal. Por favor, inténtalo de nuevo.");
+      }
+    }
   };
 
   const mergeUserData = (authData, apiData) => {
@@ -75,55 +72,69 @@ function App() {
     return null;
   };
 
-  const handleLogin = (password, email) => {
-    authorize(password, email)
-      .then((data) => {
-        if (data.token) {
-          localStorage.setItem("jwt", data.token);
-          checkToken(data.token)
-            .then(async (authUserData) => {
-              const apiUserData = await api.getUserInfo("users/me");
-              const mergedData = mergeUserData(authUserData.data, apiUserData);
-              setCurrentUser(mergedData);
-              setLoggedIn(true);
-            })
-            .catch((err) => {
-              console.log(err);
-            });
+  const handleLogin = async (password, email) => {
+    try {
+      const data = await authorize(password, email);
+
+      if (data.token) {
+        localStorage.setItem("jwt", data.token);
+
+        try {
+          const authUserData = await checkToken(data.token);
+          const apiUserData = await api.getUserInfo("users/me");
+          const mergedData = mergeUserData(authUserData.data, apiUserData);
+
+          setCurrentUser(mergedData);
+          setLoggedIn(true);
+        } catch (err) {
+          console.log(err);
         }
-      })
-      .catch((err) => {
-        localStorage.removeItem("jwt");
-        console.log(err);
-      });
+      }
+    } catch (err) {
+      localStorage.removeItem("jwt");
+      setIsSuccess(false);
+      setShowTooltip(true);
+      if (err.toString().includes("Unauthorized")) {
+        setTooltipMessage(
+          "Correo o contraseña incorrecta. Inténtalo de nuevo."
+        );
+      } else {
+        setTooltipMessage(
+          "Hubo un error al iniciar sesión. Inténtalo de nuevo."
+        );
+      }
+    }
   };
 
   useEffect(() => {
-    const token = localStorage.getItem("jwt");
-    if (token) {
-      checkToken(token)
-        .then(async (authUserData) => {
+    const validateAndSetUser = async () => {
+      const token = localStorage.getItem("jwt");
+      if (token) {
+        try {
+          const authUserData = await checkToken(token);
+
           if (authUserData.data && authUserData.data.email) {
             const apiUserData = await api.getUserInfo("users/me");
             const mergedData = mergeUserData(authUserData.data, apiUserData);
+
             setCurrentUser(mergedData);
             setLoggedIn(true);
           } else {
-            localStorage.removeItem("jwt");
-            setCurrentUser(null);
-            setLoggedIn(false);
+            throw new Error("Invalid or missing email data.");
           }
-        })
-        .catch((err) => {
+        } catch (err) {
           localStorage.removeItem("jwt");
           setCurrentUser(null);
           setLoggedIn(false);
           console.log(err);
-        });
-    } else {
-      setCurrentUser(null);
-      setLoggedIn(false);
-    }
+        }
+      } else {
+        setCurrentUser(null);
+        setLoggedIn(false);
+      }
+    };
+
+    validateAndSetUser();
   }, []);
 
   function handleLogout() {
@@ -262,7 +273,12 @@ function App() {
                 loggedIn ? (
                   <Navigate to="/main" replace />
                 ) : (
-                  <Login onLogin={handleLogin} />
+                  <Login
+                    onLogin={handleLogin}
+                    setShowTooltip={setShowTooltip}
+                    setIsSuccess={setIsSuccess}
+                    setTooltipMessage={setTooltipMessage}
+                  />
                 )
               }
             />
