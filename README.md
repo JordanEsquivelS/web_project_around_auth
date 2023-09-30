@@ -33,6 +33,22 @@ Sigue estos pasos para configurar y ejecutar el proyecto en tu máquina local:
 
 ¡Con estos pasos, deberías tener el proyecto funcionando en tu máquina local .
 
+## Demostración
+
+### Pagina Inicial de Inicio Sesión
+
+- `web_project_around_auth/signin` : Se muestra el formulario de Inicio de Sesión
+
+  ![Inicio de Sesión](./src/demo_images/1_PaginaIciarSesion.png)
+
+- `web_project_around_auth/signup` : Se muestra el formulario de Registro de usuario
+
+  ![Registro Usuario](./src/demo_images/2_RegistroUsuario.png)
+
+- `web_project_around_auth/main` : Se accede al main solo si se hizo sesión de manera correcta
+
+  ![Main](./src/demo_images/3_Main.png)
+
 ## Enlaces
 
 - [Proyecto en GitHub Pages](https://jordanesquivels.github.io/web_project_around_auth/signup)
