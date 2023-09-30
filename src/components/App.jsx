@@ -282,7 +282,6 @@ function App() {
                 )
               }
             />
-
             <Route
               path="/signup"
               element={
@@ -295,7 +294,6 @@ function App() {
                 />
               }
             />
-
             <Route
               path="/main"
               element={
