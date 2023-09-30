@@ -66,7 +66,7 @@ Sigue estos pasos para configurar y ejecutar el proyecto en tu máquina local:
 
 - Descripción: Tooltip que se muestra cuando el usuario o la contraseña son erróneos.
 
-  ![TollTip Usuario Registrado](./src/demo_images/5_ErrorContra.png)
+  ![TollTip Error de Inicio de Sesión](./src/demo_images/5_ErrorContra.png)
 
 ### Formulario para cambiar el avatar
 
@@ -100,6 +100,6 @@ Sigue estos pasos para configurar y ejecutar el proyecto en tu máquina local:
 
 ## Enlaces
 
-- [Proyecto en GitHub Pages](https://jordanesquivels.github.io/web_project_around_auth/signup)
+- [Proyecto en GitHub Pages](https://jordanesquivels.github.io/web_project_around_auth/)
 
 - [Proyecto en GitHub](https://github.com/JordanEsquivelS/web_project_around_auth/tree/main)
