@@ -37,6 +37,52 @@ function App() {
   const [isSuccess, setIsSuccess] = useState(false);
   const [tooltipMessage, setTooltipMessage] = useState("");
 
+  useEffect(() => {
+    const validateAndSetUser = async () => {
+      const token = localStorage.getItem("jwt");
+      if (token) {
+        try {
+          const authUserData = await checkToken(token);
+
+          if (authUserData.data && authUserData.data.email) {
+            const apiUserData = await api.getUserInfo("users/me");
+            const mergedData = mergeUserData(authUserData.data, apiUserData);
+
+            setCurrentUser(mergedData);
+            setLoggedIn(true);
+          } else {
+            throw new Error("Invalid or missing email data.");
+          }
+        } catch (err) {
+          localStorage.removeItem("jwt");
+          setCurrentUser(null);
+          setLoggedIn(false);
+          console.log(err);
+        }
+      } else {
+        setCurrentUser(null);
+        setLoggedIn(false);
+      }
+    };
+
+    validateAndSetUser();
+  }, []);
+
+  useEffect(() => {
+    async function fetchInitialCards() {
+      try {
+        const cardsData = await api.getInitialCards("cards");
+        setCards(cardsData);
+      } catch (error) {
+        console.error("Error fetching cards data:", error);
+      }
+    }
+
+    if (loggedIn) {
+      fetchInitialCards();
+    }
+  }, [loggedIn]);
+
   const closeTooltip = () => {
     setShowTooltip(false);
   };
@@ -106,37 +152,6 @@ function App() {
     }
   };
 
-  useEffect(() => {
-    const validateAndSetUser = async () => {
-      const token = localStorage.getItem("jwt");
-      if (token) {
-        try {
-          const authUserData = await checkToken(token);
-
-          if (authUserData.data && authUserData.data.email) {
-            const apiUserData = await api.getUserInfo("users/me");
-            const mergedData = mergeUserData(authUserData.data, apiUserData);
-
-            setCurrentUser(mergedData);
-            setLoggedIn(true);
-          } else {
-            throw new Error("Invalid or missing email data.");
-          }
-        } catch (err) {
-          localStorage.removeItem("jwt");
-          setCurrentUser(null);
-          setLoggedIn(false);
-          console.log(err);
-        }
-      } else {
-        setCurrentUser(null);
-        setLoggedIn(false);
-      }
-    };
-
-    validateAndSetUser();
-  }, []);
-
   function handleLogout() {
     setLoggedIn(false);
   }
@@ -180,21 +195,6 @@ function App() {
       console.error("Error updating avatar:", error);
     }
   };
-
-  useEffect(() => {
-    async function fetchInitialCards() {
-      try {
-        const cardsData = await api.getInitialCards("cards");
-        setCards(cardsData);
-      } catch (error) {
-        console.error("Error fetching cards data:", error);
-      }
-    }
-
-    if (loggedIn) {
-      fetchInitialCards();
-    }
-  }, [loggedIn]);
 
   const handleCardDelete = (id) => {
     handleDeleteForm();
