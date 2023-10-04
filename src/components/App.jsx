@@ -22,17 +22,20 @@ import { authorize, checkToken, register } from "../utils/auth";
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
+  const [loggedIn, setLoggedIn] = useState(!!localStorage.getItem("jwt"));
+
+  // Popup states
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
-
-  const [cards, setCards] = useState([]);
-  const [cardToDelete, setCardToDelete] = useState(null);
-  const [selectedCard, setSelectedCard] = useState(null);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
   const [isDeleteForm, setDeleteForm] = useState(false);
 
-  const [loggedIn, setLoggedIn] = useState(!!localStorage.getItem("jwt"));
+  // Card states
+  const [cards, setCards] = useState([]);
+  const [cardToDelete, setCardToDelete] = useState(null);
+  const [selectedCard, setSelectedCard] = useState(null);
 
+  // Tooltip states
   const [showTooltip, setShowTooltip] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [tooltipMessage, setTooltipMessage] = useState("");
